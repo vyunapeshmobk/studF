@@ -1,16 +1,9 @@
-version: 2.1
 jobs:
-    trial:
-      docker:
-          - image: circleci/ruby:2.5.3
-      parallelism: 16
-      steps:
-        - run:
-            name: Install Dependenciss
-            command: lscpu
-
-workflows:
-    version: 2.1
-    build:
-        jobs:
-        - trial
+  build:
+    docker:
+      - image: cimg/base:2022.04
+    steps:
+      - checkout
+      # Whatever you want to do
+      - run: sudo apt-get update && sudo apt-get install -y cowsay
+      - run: cowsay Continuous Integration Rocks!
